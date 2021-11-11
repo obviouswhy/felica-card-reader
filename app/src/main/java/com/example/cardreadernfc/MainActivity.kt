@@ -41,11 +41,11 @@ class MainActivity : AppCompatActivity() {
         cardReader.setListener(cardListener)
     }
 
+    /*
     public override fun onStart() {
         super.onStart()
         toggle?.isChecked = true
     }
-    /*
 
     override fun onResume() {
         super.onResume()
