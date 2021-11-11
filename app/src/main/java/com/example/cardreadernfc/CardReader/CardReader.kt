@@ -5,17 +5,16 @@ import android.content.Context
 import android.nfc.NfcAdapter
 import android.nfc.NfcManager
 import android.nfc.Tag
-import android.nfc.tech.NfcF
+import android.os.Looper
 import android.os.Message
-import com.example.cardreadernfc.utils.Utils
-import java.util.*
 
 
 interface CardReaderInterface : CardReader.Listener {
     fun onReadTag(tag : Tag)
 }
 
-class CardReader(private val context: Context, private val activity: Activity): android.os.Handler() {
+class CardReader(private val context: Context, private val activity: Activity): android.os.Handler(
+    Looper.getMainLooper()) {
     private var nfcmanager : NfcManager? = null
     private var nfcadapter : NfcAdapter? = null
     private var callback : CustomReaderCallback? = null
@@ -47,9 +46,9 @@ class CardReader(private val context: Context, private val activity: Activity): 
         }
     }
 
-    fun setListener(listener: CardReader.Listener?) {
+    fun setListener(listener: Listener?) {
         if (listener is CardReaderInterface) {
-            this.listener = listener as CardReaderInterface
+            this.listener = listener
         }
     }
 
